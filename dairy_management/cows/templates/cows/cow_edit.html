@@ -1,0 +1,18 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>New Cow</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'cows/styles.css' %}">
+</head>
+<body>
+    <h1>New Cow</h1>
+    <div class="container">
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Save</button>
+        </form>
+    </div>
+</body>
+</html>

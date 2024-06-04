@@ -1,0 +1,36 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Cow List</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'cows/styles.css' %}">
+</head>
+<body>
+    <h1>WELCOME TO DAIRY MANAGEMENT</h1>
+    <h2>Cows</h2>
+    <div class="container">
+        <ul>
+            {% for cow in cows %}
+            <li>
+                <a href="{% url 'cow_detail' pk=cow.pk %}">{{ cow.name }}</a><br><br><br>
+                <a href="{% url 'cow_edit' pk=cow.pk %}">Edit</a><br><br><br><br>
+                <form method="post" action="{% url 'cow_delete' pk=cow.pk %}" style="display:inline;">
+                    {% csrf_token %}
+                    <button type="submit">Delete</button>
+                </form>
+            </li>
+            {% endfor %}
+        </ul>
+        <a href="{% url 'cow_new' %}">Add new cow</a>
+        {% if user.is_authenticated %}
+        <br><br>
+        <form method="post" action="{% url 'logout' %}">
+                {% csrf_token %}
+                <button type="submit">Logout</button>
+            </form>
+            {% else %}
+            <a href="{% url 'login' %}">Login</a>
+        {% endif %}
+    </div>
+</body>
+</html>

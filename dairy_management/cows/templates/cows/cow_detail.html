@@ -1,0 +1,30 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ cow.name }}</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'cows/styles.css' %}">
+</head>
+<body>
+    <h1>{{ cow.name }}</h1>
+    <div class="container">
+        <p><strong>Breed:</strong> {{ cow.breed }}</p>
+        <p><strong>Milk Production:</strong> {{ cow.milk_production }} litres</p>
+        <p><strong>Weight:</strong> {{ cow.weight }} kg</p>
+        <p><strong>Health:</strong> {{ cow.health }}</p>
+        <a href="{% url 'cow_edit' pk=cow.pk %}">Edit</a><br><br>
+        <form method="post" action="{% url 'cow_delete' pk=cow.pk %}">
+            {% csrf_token %}
+            <button type="submit">Delete</button>
+        </form>
+        <h2>Milk Records</h2>
+        <ul>
+            {% for record in milk_records %}
+            <li>{{ record.date }}: {{ record.quantity }} litres</li>
+            {% endfor %}
+        </ul>
+        <a href="{% url 'add_milk_record' cow_id=cow.pk %}">Add Milk Record</a><br><br>
+        <a href="{% url 'cow_list' %}">Back to list</a>
+    </div>
+</body>
+</html>
