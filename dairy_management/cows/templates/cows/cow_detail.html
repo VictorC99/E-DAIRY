@@ -9,7 +9,7 @@
     <h1>{{ cow.name }}</h1>
     <div class="container">
         <p><strong>Breed:</strong> {{ cow.breed }}</p>
-        <p><strong>Milk Production:</strong> {{ cow.milk_production }} litres</p>
+        <p><strong>Date of Birth:</strong> {{ cow.date_of_birth }} litres</p>
         <p><strong>Weight:</strong> {{ cow.weight }} kg</p>
         <p><strong>Health:</strong> {{ cow.health }}</p>
         <a href="{% url 'cow_edit' pk=cow.pk %}">Edit</a><br><br>

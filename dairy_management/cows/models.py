@@ -1,10 +1,11 @@
 from django.db import models
+from django.utils import timezone
 from django.contrib.auth.models import User
 
 class Cow(models.Model):
     name = models.CharField(max_length=100)
     breed = models.CharField(max_length=100)
-    milk_production = models.FloatField(help_text="Milk production in litres")
+    date_of_birth = models.DateField(help_text="Date of birth", default=timezone.now)
     weight = models.FloatField(help_text="Weight in kilograms")
     health = models.TextField()
 
