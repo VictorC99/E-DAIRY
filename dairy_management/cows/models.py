@@ -8,6 +8,8 @@ class Cow(models.Model):
     date_of_birth = models.DateField(help_text="Date of birth", default=timezone.now)
     weight = models.FloatField(help_text="Weight in kilograms")
     health = models.TextField()
+    is_deleted = models.BooleanField(default=False)
+    deletion_reason = models.TextField(blank=True, null=True)
 
     def __str__(self):
         return self.name

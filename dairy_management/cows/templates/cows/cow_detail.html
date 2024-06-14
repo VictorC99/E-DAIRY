@@ -12,11 +12,6 @@
         <p><strong>Date of Birth:</strong> {{ cow.date_of_birth }} litres</p>
         <p><strong>Weight:</strong> {{ cow.weight }} kg</p>
         <p><strong>Health:</strong> {{ cow.health }}</p>
-        <a href="{% url 'cow_edit' pk=cow.pk %}">Edit</a><br><br>
-        <form method="post" action="{% url 'cow_delete' pk=cow.pk %}">
-            {% csrf_token %}
-            <button type="submit">Delete</button>
-        </form>
         <h2>Milk Records</h2>
         <ul>
             {% for record in milk_records %}

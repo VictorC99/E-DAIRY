@@ -1,4 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
+from django.http import HttpResponse 
 from .models import Cow, MilkRecord
 from .forms import CowForm, MilkRecordForm
 from django.shortcuts import render, redirect
@@ -8,8 +9,8 @@ from django.contrib.auth.decorators import login_required
 
 @login_required
 def cow_list(request):
-    cows = Cow.objects.all()
-    return render(request, 'cows/cow_list.html', {'cows': cows})
+  cows = Cow.objects.filter(is_deleted=False)
+  return render(request, 'cows/cow_list.html', {'cows': cows})
 
 @login_required
 def cow_detail(request, pk):
@@ -41,11 +42,23 @@ def cow_edit(request, pk):
     return render(request, 'cows/cow_edit.html', {'form': form})
 
 @login_required
+def deleted_cows(request):
+    deleted_cows = Cow.objects.filter(is_deleted=True)
+    return render(request, 'cows/deleted_cow_list.html', {'deleted_cows': deleted_cows})
+
+
+@login_required
 def cow_delete(request, pk):
     cow = get_object_or_404(Cow, pk=pk)
-    if request.method == "POST":
-        cow.delete()
-        return redirect('cow_list')
+    if request.method == 'POST':
+        reason = request.POST.get('reason')
+        if reason:
+            cow.is_deleted = True
+            cow.deletion_reason = reason
+            cow.save()
+            return redirect('cow_list')
+        else:
+            return HttpResponse("A reason for deletion is required.", status=400)
     return render(request, 'cows/cow_confirm_delete.html', {'cow': cow})
 
 @login_required

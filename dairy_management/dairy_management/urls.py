@@ -22,5 +22,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', auth_views.LoginView.as_view(template_name='cows/login.html'), name='login'),
     path('cows/', include('cows.urls')),
+     
 ]
 

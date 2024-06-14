@@ -12,4 +12,5 @@ urlpatterns = [
     path('login/', auth_views.LoginView.as_view(template_name='cows/login.html'), name='login'),
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),
     path('register/', views.register, name='register'),
+    path('deleted_cows/', views.deleted_cows, name='deleted_cows'),
 ]

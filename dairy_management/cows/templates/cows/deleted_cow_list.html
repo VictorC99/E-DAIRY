@@ -1,0 +1,27 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Deleted Cow List</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'cows/styles.css' %}">
+</head>
+<body>
+    <h1>Deleted Cows</h1>
+    <div class="container">
+        <ul>
+            {% for cow in deleted_cows %}
+            <li>
+                <strong>Name:</strong> {{ cow.name }}<br>
+                <strong>Breed:</strong> {{ cow.breed }}<br>
+                <strong>Date of Birth:</strong> {{ cow.date_of_birth }}<br>
+                <strong>Weight:</strong> {{ cow.weight }} kg<br>
+                <strong>Health:</strong> {{ cow.health }}<br>
+                <strong>Reason for Deletion:</strong> {{ cow.deletion_reason }}<br><br>
+            </li>
+            {% endfor %}
+        </ul>
+        <a href="{% url 'cow_list' %}">Back to List</a>
+    </div>
+</body>
+</html>
+
