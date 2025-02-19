@@ -16,6 +16,6 @@ sys.path.append('/opt/render/project/src')
 
 from django.core.wsgi import get_wsgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'dairy_management.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'dairymanagement.settings')
 
 application = get_wsgi_application()
